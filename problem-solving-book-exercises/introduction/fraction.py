@@ -9,6 +9,8 @@ def gcd(m,n):
 
 class Fraction:
      def __init__(self,top,bottom):
+         if not(isinstance(top, int) and isinstance(bottom, int)):
+             raise TypeError("Error: NUMERITOR AND DENOMINATOR HAVE TO BE INTEGERS")
          common = gcd(top,bottom)
          self.num = top//common
          self.den = bottom//common
@@ -31,14 +33,15 @@ class Fraction:
 
          return firstnum == secondnum
 
-     def __eq__(self, other):
-         firstnum = self.num * other.den
-         secondnum = other.num * self.den
+     def __mul__(self, other):
+         newnum = self.num * other.num
+         newden = self.den * other.den
+         return Fraction(newnum,newden)
 
-         return firstnum == secondnum
+     def getNum(self):
+         return self.num
 
-x = Fraction(2,4)
+x = Fraction(1,'3')
 y = Fraction(2,3)
 print(x)
-print(x+y)
-print(x == y)
+print(x*y)
